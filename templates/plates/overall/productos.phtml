@@ -1,0 +1,104 @@
+<?php require'core/models/Producto.php';
+$obj = new Producto;
+    $us = $obj->producto(); ?>
+<!-- Top Categories-->
+      <section class="container padding-top-3x">
+        <h3 class="text-center mb-30">Categorias principales</h3>
+        <div class="row">
+          <div class="col-md-4 col-sm-6">
+            <div class="card mb-30"><a class="card-img-tiles" href="shop-grid-ls.html">
+                <div class="inner">
+                  <div class="main-img"><img src="views/backend/img/shop/categories/01.jpg" alt="Category"></div>
+                  <div class="thumblist"><img src="views/backend/img/shop/categories/02.jpg" alt="Category"><img src="views/backend/img/shop/categories/03.jpg" alt="Category"></div>
+                </div></a>
+              <div class="card-body text-center">
+                <h4 class="card-title">Ropa</h4>
+                <p class="text-muted">Precios desde $49.99</p><a class="btn btn-outline-primary btn-sm" href="shop-grid-ls.html">Ver productos</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <div class="card mb-30"><a class="card-img-tiles" href="shop-grid-ls.html">
+                <div class="inner">
+                  <div class="main-img"><img src="views/backend/img/shop/categories/04.jpg" alt="Category"></div>
+                  <div class="thumblist"><img src="views/backend/img/shop/categories/05.jpg" alt="Category"><img src="views/backend/img/shop/categories/06.jpg" alt="Category"></div>
+                </div></a>
+              <div class="card-body text-center">
+                <h4 class="card-title">Zapatos</h4>
+                <p class="text-muted">Precios desde $56.00</p><a class="btn btn-outline-primary btn-sm" href="shop-grid-ls.html">Ver productos</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <div class="card mb-30"><a class="card-img-tiles" href="shop-grid-ls.html">
+                <div class="inner">
+                  <div class="main-img"><img src="views/backend/img/shop/categories/07.jpg" alt="Category"></div>
+                  <div class="thumblist"><img src="views/backend/img/shop/categories/08.jpg" alt="Category"><img src="views/backend/img/shop/categories/09.jpg" alt="Category"></div>
+                </div></a>
+              <div class="card-body text-center">
+                <h4 class="card-title">Pantalón</h4>
+                <p class="text-muted">Precios desde $27.00</p><a class="btn btn-outline-primary btn-sm" href="shop-grid-ls.html">Ver productos</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center"><a class="btn btn-outline-danger margin-top-none" href="shop-categories.html">Todas las categorias</a></div>
+      </section>
+      <!-- fin de top categorias -->
+
+<section class="container padding-top-3x padding-bottom-3x">
+        <h3 class="text-center mb-30">Productos de la tienda</h3>
+        <div class="owl-carousel" data-owl-carousel="{ &quot;nav&quot;: false, &quot;dots&quot;: true, &quot;margin&quot;: 30, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;576&quot;:{&quot;items&quot;:2},&quot;768&quot;:{&quot;items&quot;:3},&quot;991&quot;:{&quot;items&quot;:4},&quot;1200&quot;:{&quot;items&quot;:4}} }">
+          <!-- Product-->
+          <?php for ($i=0; $i < count($us); $i++) { ?>
+            
+            <?= '<div class="grid-item">
+            <div class="product-card">
+              <div class="rating-stars"><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star"></i>
+                </div><a class="product-thumb" href="'.$us[$i]['Nombre_produc'].'"><img src="'.$us[$i]['Img_produc'].'" alt="'.$us[$i]['Nombre_produc'].'"></a>
+              <h3 class="product-title"><a href="'.$us[$i]['Nombre_produc'].'">'.$us[$i]['Nombre_produc'].'</a></h3>
+              <h4 class="product-price">
+                $'.$us[$i]['Precio_produc'].'
+              </h4>
+              <div class="product-buttons">
+                <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Me gusta"><i class="icon-heart"></i></button>
+                <button class="btn btn-outline-primary btn-sm"'?><?php if (!isset($_SESSION[SESS_APP_ID])): ?>
+                <?="id='iniciaS' >Añadir a la cesta</button>"?>
+              <?php else: ?>
+                <?="onclick='cestapro(idpro=".$us[$i]['Id_produc'].");' data-toast data-toast-type='success' data-toast-position='topRight' data-toast-icon='icon-circle-check' data-toast-title=".$us[$i]['Nombre_produc']." data-toast-message='El producto se añadio a la cesta'>Añadir a la cesta</button>"?>
+                <?php endif ?>
+              <?='</div></div></div>'?>
+          
+          <?php } ?>
+          <!-- Product-->
+        </div>
+      </section>
+      <!-- Popular Brands-->
+      <section class="bg-faded padding-top-3x padding-bottom-3x">
+        <div class="container">
+          <h3 class="text-center mb-30 pb-2">Marcas populares</h3>
+          <div class="owl-carousel" data-owl-carousel="{ &quot;nav&quot;: false, &quot;dots&quot;: false, &quot;loop&quot;: true, &quot;autoplay&quot;: true, &quot;autoplayTimeout&quot;: 4000, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:2}, &quot;470&quot;:{&quot;items&quot;:3},&quot;630&quot;:{&quot;items&quot;:4},&quot;991&quot;:{&quot;items&quot;:5},&quot;1200&quot;:{&quot;items&quot;:6}} }"><img class="d-block w-110 opacity-75 m-auto" src="views/backend/img/brands/01.png" alt="Adidas"><img class="d-block w-110 opacity-75 m-auto" src="views/backend/img/brands/02.png" alt="Brooks"><img class="d-block w-110 opacity-75 m-auto" src="views/backend/img/brands/03.png" alt="Valentino"><img class="d-block w-110 opacity-75 m-auto" src="views/backend/img/brands/04.png" alt="Nike"><img class="d-block w-110 opacity-75 m-auto" src="views/backend/img/brands/05.png" alt="Puma"><img class="d-block w-110 opacity-75 m-auto" src="views/backend/img/brands/06.png" alt="New Balance"><img class="d-block w-110 opacity-75 m-auto" src="views/backend/img/brands/07.png" alt="Dior"></div>
+        </div>
+      </section>
+      <!-- Services-->
+      <section class="container padding-top-3x padding-bottom-2x">
+        <div class="row">
+          <div class="col-md-3 col-sm-6 text-center mb-30"><img class="d-block w-90 img-thumbnail rounded-circle mx-auto mb-3" src="views/backend/img/services/01.png" alt="Shipping">
+            <h6>Envío gratis a todo el mundo</h6>
+            <p class="text-muted margin-bottom-none">Envío gratis para todos los pedidos superiores a $100</p>
+          </div>
+          <div class="col-md-3 col-sm-6 text-center mb-30"><img class="d-block w-90 img-thumbnail rounded-circle mx-auto mb-3" src="views/backend/img/services/02.png" alt="Money Back">
+            <h6>Garantía de devolución del dinero</h6>
+            <p class="text-muted margin-bottom-none">Devolvemos dinero en 30 días</p>
+          </div>
+          <div class="col-md-3 col-sm-6 text-center mb-30"><img class="d-block w-90 img-thumbnail rounded-circle mx-auto mb-3" src="views/backend/img/services/03.png" alt="Support">
+            <h6>Atención al cliente 24/7</h6>
+            <p class="text-muted margin-bottom-none">Atención al cliente amigable 24/7</p>
+          </div>
+          <div class="col-md-3 col-sm-6 text-center mb-30"><img class="d-block w-90 img-thumbnail rounded-circle mx-auto mb-3" src="views/backend/img/services/04.png" alt="Payment">
+            <h6>Pago seguro en línea</h6>
+            <p class="text-muted margin-bottom-none">Poseemos SSL / Secure Certificate</p>
+          </div>
+        </div>
+      </section>
+      <!-- Site Footer-->

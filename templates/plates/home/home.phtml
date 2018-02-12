@@ -1,0 +1,33 @@
+<?= $this->insert('overall/header') ?>
+<!-- Body-->
+  <body>
+   <?= $this->insert('overall/navmovil')?>
+<?= $this->insert('overall/topnav')?>
+    <!--BODY DE LA PLANTILLA r-->
+      <!-- inicio de carrusell -->
+    <?= $this->insert('overall/carrusell')?>
+      <!-- fin de carrusell -->
+    <div class="offcanvas-wrapper">
+      
+      <!-- Page Content-->
+
+
+      <?= $this->insert('overall/productos')?>
+
+    <?= $this->insert('overall/inner_footer')?>
+    <?= $this->insert('overall/footer')?>
+    <script>
+      $('#entrar').click(function() {
+        window.location="Login";
+      });
+      $('#registrar').click(function() {
+        window.location="Registro";
+      });
+      $('#iniciaS').click(function(){
+        window.location="Login";
+      });
+      
+    </script>
+  </body>
+
+</html>

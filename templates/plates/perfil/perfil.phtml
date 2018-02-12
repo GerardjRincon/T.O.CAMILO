@@ -1,0 +1,242 @@
+<?= $this->insert('overall/header') ?>
+<!-- Body-->
+  <body>
+   <?= $this->insert('overall/navmovil')?>
+<?= $this->insert('overall/topnav')?>
+    <!--BODY DE LA PLANTILLA r-->
+    <?php require'core/models/Perfil.php';
+$obj = new Perfil;
+    $us = $obj->usuarios(); 
+    $dat = $obj->carrito(); 
+    $mp= $obj->Misproductos();?>
+    <div class="offcanvas-wrapper">
+      <div class="page-title">
+        <div class="container">
+          <div class="column">
+            <h1>Mi perfil</h1>
+          </div>
+          <div class="column">
+            <ul class="breadcrumbs">
+              <li><a href="home/">Inicio</a>
+              </li>
+              <li class="separator">&nbsp;</li>
+              <li>Mi perfil</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Page Content-->
+      <div class="container padding-bottom-3x mb-2">
+        <div class="row">
+          <div class="col-lg-4">
+            
+            <aside class="user-info-wrapper">
+              <div class="user-cover" style="background-image: url(views/backend/img/account/user-cover-img.jpg);">
+                <div class="info-label" data-toggle="tooltip" title="Actualmente tienes <?=$us[0]['Puntos'];?> puntos de reputación, Sigue aumentando tu reputación para que más clientes puedan comprar tus productos"><i class="icon-medal"></i><?=$us[0]['Puntos'];?></div>
+              </div>
+              <div class="user-info">
+                <div class="user-avatar"><a class="edit-avatar" href="#" data-toggle="tooltip" title="Actualiza tu foto de perfil, te recomendamos que en la foto aparezcas tu solamente y que se pueda distingir bien tu imagen para crear mas confianza en los clientes"></a><img src="<?=$us[0]['Img_users'];?>" alt="User"></div>
+                <div class="user-data">
+                  <h4><?=$us[0]['Nombre']. ' '.$us[0]['Apellido'];?></h4><span>Ultima sesión <?=$us[0]['Timestamp'];?></span>
+                </div>
+              </div>
+            </aside>
+            <nav class="list-group" ><a class="list-group-item with-badge active" href="#Ordenes" data-toggle="tab" role="tab"><i class="icon-bag"></i>Mis productos<span class="badge badge-primary badge-pill"></span></a><a class="list-group-item" href="#Perfil" data-toggle="tab" role="tab"><i class="icon-head"></i>Perfil</a><a class="list-group-item" href="#Contacto" data-toggle="tab" role="tab"><i class="icon-map"></i>Contacto</a><a class="list-group-item with-badge" href="#Carrito" data-toggle="tab" role="tab"><i class="icon-heart"></i>Carrito<span class="badge badge-primary badge-pill"><?= count($dat); ?></span></a></nav>
+          </div>
+            <div class="tab-content col-lg-8">
+              <div class="tab-pane fade show active" id="Ordenes" role="tabpanel">
+                <h6 class="text-muted text-normal text-uppercase">Mis productos</h6>
+                  
+                  <div class="table-responsive wishlist-table margin-bottom-none">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Nombre del producto</th>
+                    <th class="text-center"><a class="btn btn-sm btn-outline-danger" href="#">Limpiar lista</a></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php                   
+                 for($i = 0; $i < count($mp); $i++){ ?> 
+
+                <?=  $productos= '<tr><td>
+                      <div class="product-item"><a class="product-thumb" href="shop-single.html"><img src="'.$mp[$i]['Img_produc'].'" alt="'.$mp[$i]['Img_produc'].'"></a>
+                        <div class="product-info">
+                          <h4 class="product-title"><a href="'.$mp[$i]['Nombre_produc'].'">'.$mp[$i]['Nombre_produc'].'</a></h4>
+                          <div class="text-lg text-medium text-muted">$'.$mp[$i]['Precio_produc'].'</div>
+                          <div>Marca:
+                            <div class="d-inline text-info">'.$mp[$i]['Marca'].'</div>
+                          </div>
+                          <div>Descripción:
+                            <div class="d-inline text-info">'.$mp[$i]['Descripcion_produc'].'</div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-center"><a class="remove-from-cart" href="#" data-toggle="tooltip" title="Remove item"><i class="icon-cross"></i></a></td></tr>';
+                 
+                 }
+                  ?>
+                </tbody>
+              </table>
+            </div>
+            <hr class="mb-4">
+            <label class="custom-control custom-checkbox d-block">
+              <input class="custom-control-input" type="checkbox" checked><span class="custom-control-indicator"></span><span class="custom-control-description">Notificarme sobre cualquier accion en mis productos</span>
+            </label>
+              </div>
+              <div class="tab-pane fade" id="Perfil" role="tabpanel">
+            <div class="padding-top-2x mt-2 hidden-lg-up"></div>
+            <h6 class="text-muted text-normal text-uppercase">Datos de usuario</h6>
+            <hr class="margin-bottom-1x">
+            <form class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="account-fn">Nombre</label>
+                  <input class="form-control" type="text" name="Nombre" id="Nombre" value="<?=$us[0]['Nombre'];?>" placeholder="Nombre" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="account-ln">Apellido</label>
+                  <input class="form-control" type="text" name="Apellido" id="Apellido" value="<?=$us[0]['Apellido'];?>" placeholder="Apellido" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="account-email">Email</label>
+                  <input class="form-control" type="email" name="Email" id="Email" value="<?=$us[0]['Email'];?>" placeholder="Ejemplo@gmail.com" disabled >
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="account-phone">Telefono</label>
+                  <input class="form-control" type="text" name="Telefono" id="Telefono" value="<?=$us[0]['Telefono'];?>" placeholder="+58(123) 456 78 90" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="account-phone">Telefono opcional</label>
+                  <input class="form-control" type="text" name="Telefono2" id="Telefono2" value="<?=$us[0]['Tele_op'];?>" placeholder="+58(123) 456 78 90" required>
+                </div>
+              </div>
+              <div class="col-12">
+                <hr class="mt-2 mb-3">
+                <div class="d-flex flex-wrap justify-content-between align-items-center">
+                  <label class="custom-control custom-checkbox d-block">
+                    <input class="custom-control-input checkk" name="actu" type="checkbox" id="check" checked><span class="custom-control-indicator"></span><span class="custom-control-description">Subscribe me to Newsletter</span>
+                  </label>
+                  <button class="btn btn-primary margin-right-none" type="button" data-toast data-toast-position="topRight" data-toast-type="success" data-toast-icon="icon-circle-check" data-toast-title="Exito!" data-toast-message="Tu perfil se actualizó correctamente.">Actualizar Información</button>
+                </div>
+              </div>
+            </form>
+              </div>
+              <div class="tab-pane fade" id="Contacto" role="tabpanel">
+                <h6 class="text-muted text-normal text-uppercase">Contacto de usuario</h6>
+            <hr class="margin-bottom-1x">
+                <form class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="account-company">Nombre de tu empresa</label>
+                  <input class="form-control" type="text" name="NombreE" placeholder="Nombre de tu empresa">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="account-country">Pais</label>
+                  <select class="form-control">
+                    <option disabled>Elije el pais</option>
+                    <option>Australia</option>
+                    <option>Canada</option>
+                    <option>France</option>
+                    <option>Germany</option>
+                    <option>Switzerland</option>
+                    <option>United States</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="account-city">Ciudad de residencia</label>
+                  <select class="form-control" id="account-city">
+                    <option disabled>Elije la ciudad</option>
+                    <option>Amsterdam</option>
+                    <option>Berlin</option>
+                    <option>Geneve</option>
+                    <option>New York</option>
+                    <option>Paris</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="account-zip">Codigo postal</label>
+                  <input class="form-control" type="text" id="account-zip" placeholder="Ejem: 0102" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="account-address1">Telefono 1</label>
+                  <input class="form-control" type="text" id="account-address1" placeholder="+58(123)4567890" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="account-address2">Telefono 2</label>
+                  <input class="form-control" type="text" id="account-address2"  placeholder="+58(123)4567890">
+                </div>
+              </div>
+              <div class="col-12 padding-top-1x">
+                <div class="text-right">
+                  <button class="btn btn-primary margin-bottom-none" type="button" data-toast data-toast-position="topRight" data-toast-type="success" data-toast-icon="icon-circle-check" data-toast-title="Success!" data-toast-message="Your address updated successfuly.">Actualizar información</button>
+                </div>
+              </div>
+            </form>
+              </div>
+              <div class="tab-pane fade" id="Carrito" role="tabpanel">
+                <h6 class="text-muted text-normal text-uppercase">Carrito de compras</h6>
+                  <div class="table-responsive wishlist-table margin-bottom-none">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Nombre del producto</th>
+                    <th class="text-center"><a class="btn btn-sm btn-outline-danger" href="#">Limpiar lista</a></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+
+                    <?php                   
+                 for($a = 0; $a < count($dat); $a++){ ?> 
+
+                <?=  $productos= '<tr><td>
+                      <div class="product-item"><a class="product-thumb" href="shop-single.html"><img src="'.$dat[$a]['Img'].'" alt="'.$dat[$a]['Img'].'"></a>
+                        <div class="product-info">
+                          <h4 class="product-title"><a href="'.$dat[$a]['Titulo'].'">'.$dat[$a]['Titulo'].'</a></h4>
+                          <div class="text-lg text-medium text-muted">'.$dat[$a]['cantidad'].' x $'.$dat[$a]['Precio'].'</div>
+                          <div>Descripción:
+                            <div class="d-inline text-info">'.$dat[$a]['Descripcion'].'</div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-center"><a class="remove-from-cart" href="#" data-toggle="tooltip" title="Remove item"><i class="icon-cross"></i></a></td></tr>';
+                 
+                 }
+                  ?>
+                </tbody>
+              </table>
+            </div>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+      
+    
+    <?= $this->insert('overall/inner_footer')?>
+    <?= $this->insert('overall/footer')?>
+    <script src="views/app/js/perfil/perfil.js"></script>
+  </body>
+
+</html>

@@ -1,0 +1,33 @@
+	</div>
+    <!-- Back To Top Button--><a class="scroll-to-top-btn" href="#"><i class="icon-arrow-up"></i></a>
+    <!-- Backdrop-->
+    <div class="site-backdrop"></div>
+    <!-- JavaScript (jQuery) libraries, plugins and custom scripts-->
+    <?php if (DEBUG): ?>
+  <script src="views/app/js/jdev.js"></script>
+<?php else: ?>
+  <script src="views/app/js/jquery.js"></script>
+<?php endif ?>
+  
+
+<script src="views/app/js/jquery.numeric.js"></script>
+<script src="views/backend/js/vendor.min.js"></script>
+    <script src="views/backend/js/scripts.min.js"></script>
+    <!-- Customizer scripts-->
+    <script src="views/backend/customizer/customizer.min.js"></script>
+    <script src="views/app/js/jquery.min.js"></script>
+
+    <?php if (!isset($_SESSION[SESS_APP_ID])): ?>
+  <?= $this->insert('overall/login') ?>
+  <?= $this->insert('overall/register') ?>
+  <?= $this->insert('overall/lostpass') ?>
+
+  <script src="views/app/js/login.js"></script>
+  <script src="views/app/js/register.js"></script>
+  <script src="views/app/js/lostpass.js"></script>
+  <?php else: ?>
+<script src="views/app/js/noti/noti.js"></script>
+<?php endif ?>
+    <!-- <script>
+  $('.numeric').numeric();
+</script> -->
